@@ -11,7 +11,7 @@ export const SideNavigation = () => {
       <div
         className={clsx(
           toggle ? "left-0" : "-left-50",
-          "fixed top-15 z-50 flex transition-all duration-300 cursor-pointer"
+          "fixed top-15 z-50 flex transition-all duration-300"
         )}
       >
         <div className="flex min-h-dvh border-r-2 border-white h-full w-50 text-white"></div>
@@ -20,7 +20,7 @@ export const SideNavigation = () => {
           onClick={() => {
             setToggle(!toggle);
           }}
-          className="bg-black flex h-15 w-12.5 items-center justify-center rounded-r-3xl border-y-2 border-r-2 border-white"
+          className="bg-black flex h-15 w-12.5 items-center justify-center rounded-r-3xl border-y-2 border-r-2 border-white cursor-pointer"
         >
           <IconSidebarArrow
             className={clsx(

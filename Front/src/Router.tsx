@@ -4,6 +4,7 @@ import { MainPage } from "./pages/Main";
 import { StudyPage } from "./pages/Study";
 import { PortfolioPage } from "./pages/Portfolio";
 import { ContactPage } from "./pages/Contact";
+import { EditorPage } from "./pages/Editor";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
       { path: "/study", element: <StudyPage /> },
       { path: "/portfolio", element: <PortfolioPage /> },
       { path: "/contact", element: <ContactPage /> },
+      { path: "/editor", element: <EditorPage /> },
     ],
   },
 ]);
