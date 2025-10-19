@@ -1,10 +1,24 @@
 import clsx from "clsx";
 import { useState } from "react";
 import IconSidebarArrow from "../../Icon/IconSidebarArrow";
+import type { EditStateType } from "../../type/Filter";
 
-export const EditorSide = () => {
+export const EditorSide = ({
+  state,
+  setType,
+  setCategory,
+  setTitle,
+  setImage,
+}: {
+  state: EditStateType;
+  setType: (type: string) => void;
+  setCategory: (category: string) => void;
+  setTitle: (title: string) => void;
+  setImage: (image: string) => void;
+}) => {
   const [toggle, setToggle] = useState<boolean>(false);
 
+  console.log(state, setType, setCategory, setTitle, setImage);
   return (
     <div
       className={clsx(
