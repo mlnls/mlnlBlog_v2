@@ -1,5 +1,6 @@
 import "aos/dist/aos.css";
 import Aos from "aos";
+import Up_Button from "/icon/ic_up_button.svg?url";
 
 import { useCallback, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
@@ -24,16 +25,22 @@ export const MainLayout = () => {
 
   return (
     <div className="relative h-full w-full min-w-dvw min-h-dvh overflow-x-hidden max-w-[1920px] bg-black text-white">
-      <Header />
-      <Outlet />
-      <Footer />
+      {pathname === "/" ? (
+        <Outlet />
+      ) : (
+        <>
+          <Header />
+          <Outlet />
+          <Footer />
 
-      <div
-        onClick={() => scrollToTop()}
-        className="fixed bottom-19 right-19 flex justify-center items-center w-12 h-12 bg-[#0058e4] rounded-full cursor-pointer"
-      >
-        {/* <img src={Up_Button} alt={"Up_Button"} /> */}
-      </div>
+          <div
+            onClick={() => scrollToTop()}
+            className="fixed bottom-19 right-19 flex justify-center items-center w-12 h-12 bg-[#0058e4] rounded-full cursor-pointer"
+          >
+            <img src={Up_Button} alt={"Up_Button"} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

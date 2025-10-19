@@ -8,15 +8,15 @@ import clsx from "clsx";
 
 const helper = [
   {
-    name: "ABOUT",
-    link: "/about/introduce",
+    name: "STUDY",
+    link: "/study",
   },
   {
     name: "PORTFOLIO",
-    link: "/portfolio/marketD",
+    link: "/portfolio",
   },
   {
-    name: "CONTACT US",
+    name: "CONTACT",
     link: "/contact",
   },
 ];
@@ -53,7 +53,13 @@ export const Header = () => {
       )}
     >
       <Link to="/">
-        {/* <img src={scrolled ? Color_Logo : Logo} alt="Logo" /> */}
+        {ParseText({
+          text: "mlnlBlog",
+          className: clsx(
+            scrolled ? "text-white" : "text-white",
+            "text-t3-18b cursor-pointer"
+          ),
+        })}
       </Link>
 
       <div className="flex flex-row items-center gap-x-15">

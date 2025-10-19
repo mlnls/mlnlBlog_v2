@@ -1,9 +1,7 @@
-import { Main } from "../components/Main";
-
-export const MainPage = () => {
+export const PortfolioPage = () => {
   return (
     <main className="flex w-dvw h-dvh justify-center items-center text-white">
-      <Main />
+      <div className="text-2xl">Portfolio</div>
     </main>
   );
 };
