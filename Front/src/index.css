@@ -1,68 +1,260 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme {
+  --font-sans: "Wanted Sans Std", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", sans-serif;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  --text-64: 64px;
+  --text-48: 48px;
+  --text-32: 32px;
+  --text-28: 28px;
+  --text-24: 24px;
+  --text-20: 20px;
+  --text-18: 18px;
+  --text-16: 16px;
+  --text-14: 14px;
+  --text-12: 12px;
+  --text-10: 10px;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  --leading-72: 72px;
+  --leading-56: 56px;
+  --leading-40: 40px;
+  --leading-36: 36px;
+  --leading-28: 28px;
+  --leading-20: 20px;
+  --leading-16: 16px;
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  --traking--1p: -0.01em;
+  --traking--1px: -1px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@utility text-type {
+  font-family: var(--font-sans);
+}
+
+@layer components {
+  /* H1 / 64 */
+  .text-h1-64b {
+    @apply text-type;
+    font-size: var(--text-64);
+    line-height: var(--leading-72);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-bold);
   }
-  a:hover {
-    color: #747bff;
+  .text-h1-64m {
+    @apply text-type;
+    font-size: var(--text-64);
+    line-height: var(--leading-72);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-medium);
   }
-  button {
-    background-color: #f9f9f9;
+
+  /* H2 / 48 */
+  .text-h2-48b {
+    @apply text-type;
+    font-size: var(--text-48);
+    line-height: var(--leading-56);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-h2-48m {
+    @apply text-type;
+    font-size: var(--text-48);
+    line-height: var(--leading-56);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* H3 / 32 */
+  .text-h3-32b {
+    @apply text-type;
+    font-size: var(--text-32);
+    line-height: var(--leading-40);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-h3-32m {
+    @apply text-type;
+    font-size: var(--text-32);
+    line-height: var(--leading-40);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* H4 / 28  (이미지 기준 letter-spacing -1px) */
+  .text-h4-28b {
+    @apply text-type;
+    font-size: var(--text-28);
+    line-height: var(--leading-36);
+    letter-spacing: var(--traking--1px);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-h4-28m {
+    @apply text-type;
+    font-size: var(--text-28);
+    line-height: var(--leading-36);
+    letter-spacing: var(--traking--1px);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* T1 / 24  (letter-spacing -1px) */
+  .text-t1-24b {
+    @apply text-type;
+    font-size: var(--text-24);
+    line-height: var(--leading-36);
+    letter-spacing: var(--traking--1px);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-t1-24m {
+    @apply text-type;
+    font-size: var(--text-24);
+    line-height: var(--leading-36);
+    letter-spacing: var(--traking--1px);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* T2 / 20  (letter-spacing -1px) */
+  .text-t2-20b {
+    @apply text-type;
+    font-size: var(--text-20);
+    line-height: var(--leading-28);
+    letter-spacing: var(--traking--1px);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-t2-20m {
+    @apply text-type;
+    font-size: var(--text-20);
+    line-height: var(--leading-28);
+    letter-spacing: var(--traking--1px);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* T3 / 18  (letter-spacing -1%) */
+  .text-t3-18b {
+    @apply text-type;
+    font-size: var(--text-18);
+    line-height: var(--leading-28);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-t3-18m {
+    @apply text-type;
+    font-size: var(--text-18);
+    line-height: var(--leading-28);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* B1 / 16  (letter-spacing -1px) */
+  .text-b1-16b {
+    @apply text-type;
+    font-size: var(--text-16);
+    line-height: var(--leading-20);
+    letter-spacing: var(--traking--1px);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-b1-16m {
+    @apply text-type;
+    font-size: var(--text-16);
+    line-height: var(--leading-20);
+    letter-spacing: var(--traking--1px);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* B2 / 14  (letter-spacing -1%) */
+  .text-b2-14b {
+    @apply text-type;
+    font-size: var(--text-14);
+    line-height: var(--leading-20);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-b2-14m {
+    @apply text-type;
+    font-size: var(--text-14);
+    line-height: var(--leading-20);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* C1 / 12  (letter-spacing -1%) */
+  .text-c1-12b {
+    @apply text-type;
+    font-size: var(--text-12);
+    line-height: var(--leading-16);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-c1-12m {
+    @apply text-type;
+    font-size: var(--text-12);
+    line-height: var(--leading-16);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* C2 / 10  (letter-spacing -1%) */
+  .text-c2-10b {
+    @apply text-type;
+    font-size: var(--text-10);
+    line-height: var(--leading-16);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-bold);
+  }
+  .text-c2-10m {
+    @apply text-type;
+    font-size: var(--text-10);
+    line-height: var(--leading-16);
+    letter-spacing: var(--traking--1p);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Swiper */
+  .ws-marquee {
+    --ws-translate-end: -50%;
+  }
+  .ws-track {
+    animation-name: ws-marquee;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  .ws-reverse {
+    animation-direction: reverse;
+  }
+
+  @keyframes ws-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(var(--ws-translate-end));
+    }
+  }
+
+  .ws-marquee:hover .ws-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes mouse-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ws-track {
+      animation: none !important;
+      transform: none !important;
+    }
   }
 }
