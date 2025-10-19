@@ -6,7 +6,7 @@ import { useCallback, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import { Header } from "../common/Header";
-import { Footer } from "../common/Footer";
+import { SideNavigation } from "../common/SideNavigation";
 
 export const MainLayout = () => {
   const { pathname } = useLocation();
@@ -31,11 +31,13 @@ export const MainLayout = () => {
         <>
           <Header />
           <Outlet />
-          <Footer />
+          {(pathname.includes("study") || pathname.includes("portfolio")) && (
+            <SideNavigation />
+          )}
 
           <div
             onClick={() => scrollToTop()}
-            className="fixed bottom-19 right-19 flex justify-center items-center w-12 h-12 bg-[#0058e4] rounded-full cursor-pointer"
+            className="fixed bottom-19 right-19 flex justify-center items-center w-12 h-12 bg-black rounded-full cursor-pointer border-white border-2"
           >
             <img src={Up_Button} alt={"Up_Button"} />
           </div>
