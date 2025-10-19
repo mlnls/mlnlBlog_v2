@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { HEADER_CONSTS } from "../consts/router_consts";
 
 import { ParseText } from "../hooks/ParseText";
@@ -7,6 +7,7 @@ import clsx from "clsx";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     let raf = 0;
@@ -56,7 +57,10 @@ export const Header = () => {
             {ParseText({
               text: list.name,
               className: clsx(
-                scrolled ? "text-white" : "text-white",
+                // scrolled ? "text-white" : "text-white",
+                pathname.includes(list.link)
+                  ? "text-white border-b-2 border-white"
+                  : "text-white opacity-40",
                 "text-t3-18b cursor-pointer"
               ),
             })}
