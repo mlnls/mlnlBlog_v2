@@ -1,4 +1,5 @@
 export const HEADER_CONSTS = [
+  { name: "CAREER", link: "/career" },
   {
     name: "STUDY",
     link: "/study",
