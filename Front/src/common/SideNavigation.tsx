@@ -1,9 +1,12 @@
 import { useState } from "react";
-
-import IconSidebarArrow from "../Icon/IconSidebarArrow";
 import clsx from "clsx";
 
+import IconSidebarArrow from "../Icon/IconSidebarArrow";
+import { SIDE_NAVIGATION_CONSTS } from "../consts/router_consts";
+import { Link, useLocation } from "react-router-dom";
+
 export const SideNavigation = () => {
+  const { pathname } = useLocation();
   const [toggle, setToggle] = useState<boolean>(false);
 
   return (
@@ -14,7 +17,22 @@ export const SideNavigation = () => {
           "fixed top-15 z-50 flex transition-all duration-300"
         )}
       >
-        <div className="flex min-h-dvh border-r-2 border-white h-full w-50 text-white"></div>
+        <div className="flex flex-col pt-5 gap-y-4 items-center min-h-dvh border-r-2 border-white h-full w-50 text-lg">
+          {SIDE_NAVIGATION_CONSTS.study.map((item, idx) => (
+            <Link to={item.link} key={idx}>
+              <div
+                className={clsx(
+                  pathname.includes(item.link)
+                    ? "text-white border-b-white border-b-2"
+                    : "text-white opacity-40",
+                  "cursor-pointer"
+                )}
+              >
+                {item.title}
+              </div>
+            </Link>
+          ))}
+        </div>
 
         <button
           onClick={() => {
