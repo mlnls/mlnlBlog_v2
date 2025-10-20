@@ -9,6 +9,8 @@ export const SideNavigation = () => {
   const { pathname } = useLocation();
   const [toggle, setToggle] = useState<boolean>(false);
 
+  const select = pathname.includes("study") ? "study" : "portfolio";
+
   return (
     <>
       <div
@@ -18,7 +20,7 @@ export const SideNavigation = () => {
         )}
       >
         <div className="flex flex-col pt-5 gap-y-4 items-center min-h-dvh border-r-2 border-white h-full w-50 text-lg">
-          {SIDE_NAVIGATION_CONSTS.study.map((item, idx) => (
+          {SIDE_NAVIGATION_CONSTS[select].map((item, idx) => (
             <Link to={item.link} key={idx}>
               <div
                 className={clsx(

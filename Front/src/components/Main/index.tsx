@@ -1,7 +1,6 @@
 import { MainCard } from "./Card";
 
 const helper = [
-  { title: "Career", link: "/career" },
   {
     title: "Study",
     link: "/study",
