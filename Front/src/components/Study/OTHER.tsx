@@ -1,6 +1,6 @@
 export const StudyOther = () => {
   return (
-    <div>
+    <div className="flex w-full h-full justify-center">
       <div>Other Page</div>
     </div>
   );

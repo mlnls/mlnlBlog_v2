@@ -5,6 +5,7 @@ export const initialEditState = {
   type: "Study",
   category: "",
   title: "",
+  desc: "",
   content: "",
   image: "",
 };
@@ -30,6 +31,12 @@ export const EditFilterReducer = (
       return {
         ...state,
         title: action.payload,
+      };
+
+    case "SET_DESC":
+      return {
+        ...state,
+        desc: action.payload,
       };
 
     case "SET_CONTENT":
@@ -64,6 +71,10 @@ export const useEditFilter = (initialState?: EditStateType) => {
     dispatch({ type: "SET_TITLE", payload: title });
   }, []);
 
+  const setDesc = useCallback((desc: string) => {
+    dispatch({ type: "SET_DESC", payload: desc });
+  }, []);
+
   const setContent = useCallback((content: string) => {
     dispatch({ type: "SET_CONTENT", payload: content });
   }, []);
@@ -77,6 +88,7 @@ export const useEditFilter = (initialState?: EditStateType) => {
     setType,
     setCategory,
     setTitle,
+    setDesc,
     setContent,
     setImage,
   };

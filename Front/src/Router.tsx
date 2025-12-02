@@ -6,12 +6,13 @@ import { PortfolioPage } from "./pages/Portfolio";
 import { ContactPage } from "./pages/Contact";
 import { EditorPage } from "./pages/Editor";
 
+import { StudyCounter } from "./components/Study";
+import { StudyDetail } from "./components/Study/Detail";
 import { StudyFE } from "./components/Study/FE";
 import { StudyCS } from "./components/Study/CS";
 import { StudyDevlog } from "./components/Study/DEVLOG";
 import { StudyPS } from "./components/Study/PS";
 import { StudyOther } from "./components/Study/OTHER";
-import { StudyCounter } from "./components/Study";
 import { PortfolioCounter } from "./components/Portfolio";
 import { LovinSSU } from "./components/Portfolio/LovinSSU";
 import { SSSP } from "./components/Portfolio/SSSP";
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
         element: <StudyPage />,
         children: [
           { path: "", element: <StudyCounter /> },
+          { path: ":id", element: <StudyDetail /> },
           { path: "fe", element: <StudyFE /> },
           { path: "cs", element: <StudyCS /> },
           { path: "devlog", element: <StudyDevlog /> },

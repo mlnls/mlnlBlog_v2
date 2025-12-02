@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./Back
+      dockerfile: Dockerfile
+    container_name: mlnl-blog-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URL=${MONGO_URL}
+      - NODE_ENV=development
+    volumes:
+      - ./Back:/app
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - mlnl-blog-network
+
+  frontend:
+    build:
+      context: ./Front
+      dockerfile: Dockerfile
+    container_name: mlnl-blog-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./Front:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - mlnl-blog-network
+
+networks:
+  mlnl-blog-network:
+    driver: bridge
