@@ -7,6 +7,7 @@ import clsx from "clsx";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -30,15 +31,9 @@ export const Header = () => {
 
   return (
     <div
-      //   className={clsx(
-      //     scrolled
-      //       ? "bg-black border-b border-b-[#CCC]"
-      //       : "bg-[rgba(255, 255, 255, 0.20)] border-b border-b-[#CCC]",
-      //     "fixed top-0 z-50 w-full h-15 px-30 flex justify-between items-center"
-      //   )}
       className={clsx(
         "bg-black border-b border-b-[#CCC]",
-        "fixed top-0 z-50 w-full h-15 px-30 flex justify-between items-center"
+        "fixed top-0 z-50 w-full h-15 px-5 lg:px-30 flex justify-between items-center"
       )}
     >
       <Link to="/">
@@ -51,13 +46,13 @@ export const Header = () => {
         })}
       </Link>
 
-      <div className="flex flex-row items-center gap-x-15">
+      {/* 데스크톱 메뉴 */}
+      <div className="hidden lg:flex flex-row items-center gap-x-15">
         {HEADER_CONSTS.map((list, idx) => (
           <Link to={list.link} key={idx}>
             {ParseText({
               text: list.name,
               className: clsx(
-                // scrolled ? "text-white" : "text-white",
                 pathname.includes(list.link)
                   ? "text-white border-b-2 border-white"
                   : "text-white opacity-40",
@@ -66,6 +61,58 @@ export const Header = () => {
             })}
           </Link>
         ))}
+      </div>
+
+      {/* 모바일 햄버거 메뉴 */}
+      <div className="lg:hidden relative">
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="flex flex-col gap-1.5 p-2"
+          aria-label="메뉴"
+        >
+          <span
+            className={clsx(
+              "w-6 h-0.5 bg-white transition-all duration-300",
+              isMenuOpen && "rotate-45 translate-y-2"
+            )}
+          />
+          <span
+            className={clsx(
+              "w-6 h-0.5 bg-white transition-all duration-300",
+              isMenuOpen && "opacity-0"
+            )}
+          />
+          <span
+            className={clsx(
+              "w-6 h-0.5 bg-white transition-all duration-300",
+              isMenuOpen && "-rotate-45 -translate-y-2"
+            )}
+          />
+        </button>
+
+        {isMenuOpen && (
+          <div className="absolute right-0 top-15 bg-black/95 backdrop-blur-sm border border-white/20 rounded-lg p-4 min-w-40 shadow-lg">
+            <nav className="flex flex-col gap-3">
+              {HEADER_CONSTS.map((list, idx) => (
+                <Link
+                  to={list.link}
+                  key={idx}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {ParseText({
+                    text: list.name,
+                    className: clsx(
+                      pathname.includes(list.link)
+                        ? "text-white border-b-2 border-white"
+                        : "text-white opacity-40",
+                      "text-t3-18b cursor-pointer block"
+                    ),
+                  })}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        )}
       </div>
     </div>
   );

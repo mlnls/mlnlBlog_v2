@@ -1,22 +1,28 @@
 ---
+title: "Use-Hook에 관하여"
+desc: "우리가 왜 useHook을 사용하는지"
+emotion: "🚀"
+---
 
 ## 왜 이 주제를 선택하게 되었는지
 
 ```jsx
 // 편의상 queryKey, API 함수 import 부분은 생략
 
-  const { data, isLoading, isError } =
-    useQuery<ComGeneralMailResultListResponse>({
-      queryFn: () =>
-        getGeneralMailResultList({
-          pageSize: DEFAULT_PAGE,
-          currentPage: page,
-          commitCode,
-        }),
-    });
+const { data, isLoading, isError } =
+  useQuery <
+  ComGeneralMailResultListResponse >
+  {
+    queryFn: () =>
+      getGeneralMailResultList({
+        pageSize: DEFAULT_PAGE,
+        currentPage: page,
+        commitCode,
+      }),
+  };
 
-  if (isLoading) return <Loading />;
-  if (isError) return <></>;
+if (isLoading) return <Loading />;
+if (isError) return <></>;
 ```
 
 현재 다른 프로젝트에서 사용하고 있는 실제 코드입니다.

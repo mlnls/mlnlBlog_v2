@@ -15,11 +15,12 @@ export const HEADER_CONSTS = [
 
 export const SIDE_NAVIGATION_CONSTS = {
   study: [
-    { id: 1, title: "FE", link: "/study/fe" },
-    { id: 2, title: "CS", link: "/study/cs" },
-    { id: 3, title: "DEVLOG", link: "/study/devlog" },
-    { id: 4, title: "PS", link: "/study/ps" },
-    { id: 4, title: "OTHER", link: "/study/other" },
+    { id: 0, title: "전체", link: "/study" },
+    { id: 1, title: "FE", link: "/study?tag=FE" },
+    { id: 2, title: "CS", link: "/study?tag=CS" },
+    { id: 3, title: "DEVLOG", link: "/study?tag=DEVLOG" },
+    { id: 4, title: "PS", link: "/study?tag=PS" },
+    { id: 5, title: "OTHER", link: "/study?tag=OTHERS" },
   ],
   portfolio: [
     { id: 1, title: "LovinSSU", link: "/portfolio/lovin" },
