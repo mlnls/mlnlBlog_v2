@@ -33,19 +33,25 @@ const extractToc = (content: string): TocItem[] => {
       h1Count++;
       h2Count = 0;
       h3Count = 0;
+
       const text = line.replace("# ", "").trim();
       const id = `h1-${h1Count}`;
+
       toc.push({ id, text, level: 1 });
     } else if (line.startsWith("## ")) {
       h2Count++;
       h3Count = 0;
+
       const text = line.replace("## ", "").trim();
       const id = `h2-${h1Count}-${h2Count}`;
+
       toc.push({ id, text, level: 2 });
     } else if (line.startsWith("### ")) {
       h3Count++;
+
       const text = line.replace("### ", "").trim();
       const id = `h3-${h1Count}-${h2Count}-${h3Count}`;
+
       toc.push({ id, text, level: 3 });
     }
   });
@@ -109,9 +115,18 @@ export const StudyDetail = () => {
 
   const scrollToHeading = (id: string) => {
     const element = headingRefs.current.get(id) || document.getElementById(id);
+
     if (element) {
-      const offsetTop = element.offsetTop - 100;
-      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      const headerHeight = 60;
+      const offset = 20;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerHeight - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -134,8 +149,8 @@ export const StudyDetail = () => {
   const contentWithoutFirstH1 = body.replace(/^# .*\n/, "");
 
   return (
-    <div className="flex w-full max-w-225 mx-auto py-10 relative px-5 lg:px-0">
-      <div className="flex-1 text-white prose prose-invert max-w-none">
+    <div className="flex w-full lg:max-w-225 mx-auto pb-10 relative px-5 lg:px-0">
+      <div className="flex-1 text-white prose prose-invert max-w-full lg:max-w-none">
         {title && (
           <div className="mb-8 pb-4 border-b-2 border-white">
             <h1 className="text-5xl font-bold leading-relaxed flex items-center gap-3">
@@ -158,7 +173,7 @@ export const StudyDetail = () => {
 
       {toc.length > 0 && (
         <>
-          <div className="fixed right-10 top-25 w-60 h-max overflow-y-auto z-40 lg:block hidden">
+          <div className="fixed right-10 top-20 w-60 h-max overflow-y-auto z-40 lg:block hidden">
             <div className="bg-black/80 backdrop-blur-sm border border-white/20 rounded-lg p-4 h-full">
               <div className="text-white font-bold mb-3 text-lg">목차</div>
               <nav className="flex flex-col gap-2 h-max">
@@ -181,7 +196,7 @@ export const StudyDetail = () => {
             </div>
           </div>
 
-          <div className="fixed right-10 top-25 z-40 block lg:hidden">
+          <div className="fixed right-10 top-20 z-40 block lg:hidden">
             <button
               onClick={() => setIsTocOpen(!isTocOpen)}
               className="bg-black/80 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-2 text-white hover:bg-black/90 transition-colors"
@@ -189,7 +204,7 @@ export const StudyDetail = () => {
               목차
             </button>
             {isTocOpen && (
-              <div className="absolute right-0 top-12 w-60 h-max overflow-y-auto bg-black/80 backdrop-blur-sm border border-white/20 rounded-lg p-4 mt-2">
+              <div className="absolute right-0 top-20 w-60 h-max overflow-y-auto bg-black/80 backdrop-blur-sm border border-white/20 rounded-lg p-4 mt-2">
                 <nav className="flex flex-col gap-2">
                   {toc.map((item) => (
                     <button

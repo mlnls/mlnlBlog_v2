@@ -1,5 +1,8 @@
 import { type Components } from "react-markdown";
 import { type RefObject } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { ToggleBlockquote } from "../components/markdown/ToggleBlockquote";
 
 interface CreateStudyMarkdownComponentsProps {
   headingRefs: RefObject<Map<string, HTMLHeadingElement>>;
@@ -72,15 +75,22 @@ export const createStudyMarkdownComponents = ({
 
     code({ className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || "");
+      const language = match ? match[1] : "";
+      const codeString = String(children).replace(/\n$/, "");
+
       return match ? (
-        <pre className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 overflow-x-auto leading-relaxed my-6">
-          <code className={className} {...props}>
-            {children}
-          </code>
-        </pre>
+        <div className="my-6 rounded-lg overflow-hidden [&_pre]:!m-0 [&_pre]:!p-4 [&_pre]:!rounded-lg [&_pre]:!text-sm [&_pre]:!leading-relaxed">
+          <SyntaxHighlighter
+            language={language}
+            style={vscDarkPlus}
+            PreTag="div"
+          >
+            {codeString}
+          </SyntaxHighlighter>
+        </div>
       ) : (
         <code
-          className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded leading-relaxed"
+          className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded leading-relaxed text-sm"
           {...props}
         >
           {children}
@@ -119,7 +129,54 @@ export const createStudyMarkdownComponents = ({
     },
 
     p({ children }) {
-      return <p className="leading-relaxed mb-4">{children}</p>;
+      // 텍스트 내의 URL을 링크로 변환
+      const processText = (node: React.ReactNode): React.ReactNode => {
+        if (typeof node === "string") {
+          const urlRegex = /(https?:\/\/[^\s]+)/g;
+          const parts = node.split(urlRegex);
+          return parts.map((part, index) => {
+            if (urlRegex.test(part)) {
+              return (
+                <a
+                  key={index}
+                  href={part}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 underline break-all"
+                >
+                  {part}
+                </a>
+              );
+            }
+            return part;
+          });
+        }
+        if (Array.isArray(node)) {
+          return node.map((child, index) => (
+            <span key={index}>{processText(child)}</span>
+          ));
+        }
+        return node;
+      };
+
+      return <p className="leading-relaxed mb-4">{processText(children)}</p>;
+    },
+    a({ href, children, ...props }) {
+      // 명시적인 링크만 처리 (자동 변환된 도메인 멘션 방지)
+      if (!href || (!href.startsWith("http") && !href.startsWith("/"))) {
+        return <span>{children}</span>;
+      }
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:text-blue-300 underline break-all"
+          {...props}
+        >
+          {children}
+        </a>
+      );
     },
 
     li({ children }) {
@@ -127,11 +184,7 @@ export const createStudyMarkdownComponents = ({
     },
 
     blockquote({ children }) {
-      return (
-        <aside className="bg-gray-100 dark:bg-gray-800 border-l-4 border-blue-500 pl-4 py-3 my-6 rounded-r leading-relaxed">
-          {children}
-        </aside>
-      );
+      return <ToggleBlockquote>{children}</ToggleBlockquote>;
     },
     aside({ children }) {
       return (

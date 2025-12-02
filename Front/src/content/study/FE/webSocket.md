@@ -1,4 +1,9 @@
 ---
+title: "webSocket"
+desc: "실제 사용 사례와 함께 돌아보는 webSocket"
+emotion: "🚏"
+---
+
 ## 왜 이 주제를 선택하게 되었는지
 
 https://github.com/LoveSoongAlarm/love-soong-alarm-Web
@@ -14,7 +19,6 @@ https://www.instagram.com/love_soong_alarm/
 다른 분들과 인사이트를 공유하고 싶어서 이 주제를 선택하게 되었습니다.
 
 저는 어떤 식으로 webSocket을 사용해서 채팅을 구현했고, 진행 간에 애로사항은 어떤 것이 있었는지 공유해보려 합니다.
----
 
 ## 개념
 
